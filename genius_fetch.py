@@ -2,7 +2,7 @@ import requests  # Library for making HTTP requests
 from config import GENIUS_ACCESS_TOKEN  # Import the access token securely
 
 # STEP 1: AUTHENTICATION - Provide your Genius API access token
-ACCESS_TOKEN = "your_genius_access_token"  # Replace with your actual token
+ACCESS_TOKEN = GENIUS_ACCESS_TOKEN  # Replace with your actual token
 
 
 def search_song(song_name):
