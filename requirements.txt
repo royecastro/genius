@@ -1,0 +1,4 @@
+requests
+google-cloud-storage
+google-cloud-bigquery  # If you plan to load data into BigQuery
+pandas  # Useful for processing and cleaning data
