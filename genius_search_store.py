@@ -3,10 +3,16 @@ import requests
 from google.cloud import storage
 from config import GENIUS_ACCESS_TOKEN  # Securely import API token
 from config import GENIUS_BUCKET  # Securely import GCS bucket name
+from datetime import datetime
+import pytz
 
 # Google Cloud Storage settings
 BUCKET_NAME = GENIUS_BUCKET  # Your actual bucket name
 storage_client = storage.Client()
+
+eastern = pytz.timezone('US/Eastern')
+current_time_eastern = datetime.now(eastern)
+formatted_date = current_time_eastern.strftime('%Y%m%d')
 
 def search_song(song_name):
     """
@@ -40,7 +46,7 @@ def save_to_gcs(song_name, song_list):
         song_list (list): List of JSON objects representing each song.
     """
     bucket = storage_client.bucket(BUCKET_NAME)
-    file_name = f"raw_data/{song_name.replace(' ', '_')}.json"
+    file_name = f"raw_data/{song_name.replace(' ', '_')}_{formatted_date}.json"
     blob = bucket.blob(file_name)
 
     # Convert list of JSON objects to properly formatted NDJSON
